@@ -55,6 +55,37 @@ public class Binary_Tree<Key extends Comparable<Key>, Value> {
 		    // method to find the Lowest Common Ancestor
 		    public class lowestCommonAncestor
 		    {
+		    	Node root;
+		    	
+		    	boolean F1 = false;
+		    	boolean F2 = false;
+		    	
+		    	Node findLowestCommonAncestor(int n1 ,int n2)
+		    	{
+		    		Node lac = findLCA(root,n1,n2);
+		    		
+		    		if (F1 && F2)
+		    		{
+		    			return lac;
+		    		}
+		    		
+		    		return lac;
+		    	}
+		    	
+		    	private Node findLCA(Node node, int n1, int n2)
+		    	{
+		    		if(node == null)
+		    		{
+		    			return null;
+		    			
+		    		}
+		    		
+		    		if(this.node.val == n1)
+		    		{
+		    			
+		    		}
+		    	}
+		    	
 		    	
 		    }
 
