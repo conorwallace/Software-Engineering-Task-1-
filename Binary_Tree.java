@@ -13,10 +13,10 @@ import java.util.List;
 	}
 
 	
-
+}
 		    
 		    // method to find the Lowest Common Ancestor
-		    public class lowestCommonAncestor
+		  public class Binary_Tree
 		    {
 		    	Node root;
 		    	
@@ -79,6 +79,6 @@ import java.util.List;
 		    	}
 
 		    }
-}
+
  
 
