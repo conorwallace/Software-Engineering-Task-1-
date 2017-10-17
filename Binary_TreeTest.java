@@ -28,7 +28,7 @@ public class Binary_TreeTest {
         //Test when one is the ancestor
         assertEquals("LCA(2,11)",10,treeAncestorNode.findLCA(2, 11));
         assertEquals("LCA(3,13)", 10,treeAncestorNode.findLCA(3, 13));
-        assertEquals("LCA(2,10)", 10,treeAncestorNode.findLCA(2, 10));
+        assertEquals("LCA(2,8)", 3,treeAncestorNode.findLCA(2, 8));
         assertEquals("LCA(10,10)", 10,treeAncestorNode.findLCA(10, 10));
 	}
 	
