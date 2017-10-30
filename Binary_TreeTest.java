@@ -116,6 +116,24 @@ public class Binary_TreeTest {
         assertEquals("LCA(21,100)",-1,treeNonExistentNode.findLCA(21, 100));
 	}
 	
+	@Test
+	public void testOneNode() {
+		DAG oneNode = new DAG();
+		oneNode.root = new Node(1);
+		assertEquals("The lowest common ancestor of a tree with one node", -1,
+				oneNode.LowestCommonAncestorBinaryTree(1, 0));
+	}
+
+	@Test
+	public void testTwoNodes() {
+		DAG twoNodes = new DAG();
+		twoNodes.root = new Node(1);
+		twoNodes.root.left = new Node(2);
+		assertEquals("The lowest common ancestor of a tree with two nodes", 1,
+				twoNodes.LowestCommonAncestorBinaryTree(1, 2));
+
+	
+	
 	
 	
 }
