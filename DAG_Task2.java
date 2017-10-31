@@ -18,7 +18,6 @@ public class DAG_Task2 {
 
 	// method to create a DAG with v number of nodes
     
-	
 	public DAG_Task2(int V)
 	{
 		if (V < 0) throw new IllegalArgumentException("Diagram can't have negative number of Vertices");
@@ -28,20 +27,17 @@ public class DAG_Task2 {
 	    marked = new boolean[V];
 	    stack = new boolean[V];
 	    adj = (ArrayList<Integer>[]) new ArrayList[V];
-	    for (int v = 0; v < V; v++) 
-	    {
+	    for (int v = 0; v < V; v++) {
 	        adj[v] = new ArrayList<Integer>();
 	    }              
 	}
 
 	//Returns current number of vertex
-	public int V() 
-	{
+	public int V() {
 		return V;	
 	}
 	// returns current edges in the DAG
-	public int E() 
-	{
+	public int E() {
         return E;
     }
 
@@ -125,4 +121,94 @@ public class DAG_Task2 {
 
 	        stack[v] = false;
 	    }
+	 
+	public int findLCA(int v, int w){
+		findCycle(0);
+		if(hasCycle){
+			//Graph is not a DAG
+			return -1;
+		}
+		if(validateVertex(v)==false||validateVertex(v)==false){
+			//Vertices are not valid
+			return -1;
+		}
+		if(E==0){
+			//Graph is empty
+			return -1;
+		}
+		
+		DAG_Task2 backwards = reverse();
+		ArrayList<Integer> arr1 = backwards.BFS(v);
+		ArrayList<Integer> arr2 = backwards.BFS(w);
+		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
+		boolean found = false;
+		for(int i = 0; i<arr1.size(); i++){
+				for(int t = 0; t<arr2.size(); t++){		
+					if(arr1.get(i)==arr2.get(t)){
+						commonAncestors.add(arr1.get(i));	
+						found = true;
+					}
+			}
+		}
+		
+		if(found)
+			//Returns first Ancestor in list(LCA)
+			return commonAncestors.get(0);
+		else
+			//No Ancestors found
+			return -1;
 	}
+	
+	
+	// prints BFS traversal from a given source s
+    public ArrayList<Integer> BFS(int s)
+    {
+        // Mark all the vertices as not visited(By default set as false)
+        boolean visited[] = new boolean[V];
+ 
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        ArrayList<Integer> order= new ArrayList<Integer>();
+ 
+        visited[s]=true;
+        queue.add(s);
+        
+ 
+        while (queue.size() != 0)
+        {
+            // Dequeue a vertex from queue and print it
+            s = queue.poll();           
+            order.add(s);
+            // Get all adjacent vertices of the dequeued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            Iterator<Integer> i = adj[s].listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                if (!visited[n])
+                {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+        
+        return order;
+        
+    }
+    
+    //Reverses the Directed Acyclic Graph
+    public DAG_Task2 reverse() {
+    	DAG_Task2 reverse = new DAG_Task2(V);
+        for (int v = 0; v < V; v++) {
+            for (int w : adj(v)) {
+                reverse.addEdge(w, v);
+            }
+        }
+        return reverse;
+    }
+
+	
+
+	
+}
