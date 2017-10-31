@@ -25,20 +25,6 @@ public class DAG_Task2Test {
 	}
 	
 	
-	@Test
-	public void testAddEdge(){
-		DAG_Task2 test2 = new DAG_Task2(8);
-		//This edge should add
-		test2.addEdge(0, 1);
-		assertEquals("", 1, test2.indegree(0));
-		
-		//This should print message to console and have no effect
-		test2.addEdge(-2, -5);
-		
-		//This should not either as 9>5 
-		test2.addEdge(3, 9);
-		assertEquals("Number of edges should be 1", 1, test2.E());
-	}
 	
 	@Test
 	public void testinDegree(){
@@ -62,6 +48,22 @@ public class DAG_Task2Test {
 		assertEquals("", -1, test4.outdegree(8));	
 		assertEquals("", 2, test4.outdegree(0));	
 		assertEquals("", 0, test4.outdegree(2));	
+	}
+	
+	@Test
+	public void testAddEdge(){
+		DAG_Task2 test2 = new DAG_Task2(8);
+		//This edge should add
+		test2.addEdge(0, 1);
+		test2.addEdge(1, 2);
+		assertEquals("", 1, test2.indegree(1));
+		
+		//This should print message to console and have no effect
+		test2.addEdge(-2, -5);
+		
+		//This should not either as 9>8 
+		test2.addEdge(10, 11);
+		assertEquals("Number of edges should be 2", 2, test2.E());
 	}
 	
 	
