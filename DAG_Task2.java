@@ -18,6 +18,7 @@ public class DAG_Task2 {
 
 	// method to create a DAG with v number of nodes
     
+	
 	public DAG_Task2(int V)
 	{
 		if (V < 0) throw new IllegalArgumentException("Diagram can't have negative number of Vertices");
@@ -27,17 +28,20 @@ public class DAG_Task2 {
 	    marked = new boolean[V];
 	    stack = new boolean[V];
 	    adj = (ArrayList<Integer>[]) new ArrayList[V];
-	    for (int v = 0; v < V; v++) {
+	    for (int v = 0; v < V; v++) 
+	    {
 	        adj[v] = new ArrayList<Integer>();
 	    }              
 	}
 
 	//Returns current number of vertex
-	public int V() {
+	public int V() 
+	{
 		return V;	
 	}
 	// returns current edges in the DAG
-	public int E() {
+	public int E() 
+	{
         return E;
     }
 
@@ -73,5 +77,52 @@ public class DAG_Task2 {
      }
 
 	
+	//Returns amount of directed edges pointing to vertex v
+	public int indegree(int v) {
+		if(validateVertex(v)==false){
+			return -1;
+		}
+		else{
+			return indegree[v];
+		}
+	}
 	
-}
+	//Returns amount of directed edges pointing away from vertex v
+	public int outdegree(int v) {
+		if(validateVertex(v)==false){
+			return -1;
+		}
+		else{
+			return adj[v].size();
+		}
+    }
+		
+	
+	//Returns the adjacent vertices to v
+	public Iterable<Integer> adj(int v)
+	{ return adj[v]; }
+	
+	
+	// A DAG diagram is only valid if it doesnt have a cycle, following method computes if it does or doesn't
+	public boolean hasCycle() {
+
+        return hasCycle;
+    }
+	
+	 public void findCycle(int v) {
+
+	        marked[v] = true;
+	        stack[v] = true;
+
+	        for (int w : adj(v)) {
+	            if(!marked[w]) {
+	                findCycle(w);
+	            } else if (stack[w]) {
+	                hasCycle = true;
+	                return;
+	            }
+	        }
+
+	        stack[v] = false;
+	    }
+	}
