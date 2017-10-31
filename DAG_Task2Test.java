@@ -92,4 +92,43 @@ public class DAG_Task2Test {
 			//Cycle from 2-0
 			assertTrue(cyclic.hasCycle());
 	}
+	
+	@Test
+	public void testForAcyclicGraph(){
+		DAG_Task2 acyclic = new DAG_Task2(20);
+			acyclic.addEdge(0, 1);
+			acyclic.addEdge(1, 2);
+			acyclic.addEdge(2, 3);
+			//Parameter is first vertex
+			acyclic.findCycle(0);
+			assertFalse(acyclic.hasCycle());
+	}
+
+	
+	
+	//Following tests check the LCA function for a DAG graph
+	@Test
+	public void testLCA(){
+		DAG_Task2 lca = new DAG_Task2(10);
+		
+		//--------2---5----7--
+		//---0--1-------6----8
+		//--------3---4-------
+		lca.addEdge(0, 1);
+		lca.addEdge(1, 2);
+		lca.addEdge(1, 3);
+		lca.addEdge(2, 5);
+		lca.addEdge(3, 4);
+		lca.addEdge(4, 6);
+		lca.addEdge(5, 6);
+		lca.addEdge(6, 8);
+		lca.addEdge(5, 7);
+		lca.addEdge(7, 8);
+		
+		assertEquals("", 1, lca.findLCA(5, 4));
+		assertEquals("", 7, lca.findLCA(8, 7));
+		assertEquals("", 6, lca.findLCA(6, 8));
+	}
+	
+	
 }
